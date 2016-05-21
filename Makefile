@@ -1,4 +1,4 @@
-all: fdm.png fdtd.png
+all: fdm.mp4 fdtd.mp4
 
 main: include/*hpp src/*cpp
 	g++ -Wall -fopenmp -march=native -O3 -Iinclude -g -fno-omit-frame-pointer src/*cpp -ffast-math -o main
@@ -6,11 +6,11 @@ main: include/*hpp src/*cpp
 runmain: main
 	$(shell ./main)
 
-fdm.png: runmain
-	$(shell python -c 'import numpy as np; from matplotlib import pyplot; aa = np.loadtxt("fdm.dat"); pyplot.imsave("fdm.png", aa)')
+fdm.mp4: runmain util/genvideo.py
+	$(shell python util/genvideo.py fdm.dat fdm.mp4)
 
-fdtd.png: runmain
-	$(shell python -c 'import numpy as np; from matplotlib import pyplot; aa = np.loadtxt("fdtd.dat"); aa = aa.reshape(np.sqrt(len(aa)), np.sqrt(len(aa))); pyplot.imsave("fdtd.png", aa)')
+fdtd.mp4: runmain util/genvideo.py
+	$(shell python util/genvideo.py fdtd.dat fdtd.mp4)
 
 clean:
-	rm main fdm.{png,dat} fdtd.{png,dat}
+	rm main fdm.{mp4,dat} fdtd.{mp4,dat}
