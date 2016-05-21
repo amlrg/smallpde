@@ -10,7 +10,7 @@ Field fdm(const Field& inp, const Params<ProblemType::Diffusion>& p) {
   
   using std::swap;
   for (int t = 0; t < p.timeSteps; ++t) {
-    // df/dt = D nabla^2 f
+    // df/dt = D nabla^2 f + rho
     for (int i = 1; i < p.N-1; ++i) {
 #pragma omp simd
       for (int j = 1; j < p.N-1; ++j) {
