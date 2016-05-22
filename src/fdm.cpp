@@ -14,12 +14,12 @@ Field fdm(const Field& inp, const Params<ProblemType::Diffusion>& p) {
     for (int i = 1; i < p.N-1; ++i) {
 #pragma omp simd
       for (int j = 1; j < p.N-1; ++j) {
-	wrk[p.N * i + j] = out[p.N * i + j] + d*(-4.*out[p.N * i + j]
+	wrk[p.N * i + j] = out[p.N * i + j] + d*(-Real(4)*out[p.N * i + j]
 		         + out[p.N * (i+1) + j] + out[p.N * i + (j+1)]
                          + out[p.N * (i-1) + j] + out[p.N * i + (j-1)]);
       }
     }
-    wrk[p.N * p.N/2 + p.N/2] += 1;
+    wrk[p.N * p.N/2 + p.N/2] += Real(1);
     swap(out, wrk);
   }
 

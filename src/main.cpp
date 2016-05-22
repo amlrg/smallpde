@@ -37,7 +37,6 @@ void fdtd_test() {
   Field fE(3*p.N*p.N*p.N);
   Field fH(3*p.N*p.N*p.N);
 
-
   std::ofstream out("fdtd.dat", std::ofstream::out);
   const int DIM = 0;
   const int i   = p.N/2;
@@ -54,7 +53,6 @@ void fdtd_test() {
     }
   }
 }
-
 
 int main() {
   fdm_test();
